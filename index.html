@@ -101,13 +101,17 @@
   }
   .legend span{display:inline-flex;align-items:center;gap:6px;}
   .swatch{width:14px;height:14px;border-radius:4px;display:inline-block;}
+  /* 저작권 표시 */
+  .copyright{
+    text-align:center;margin-top:30px;font-size:12px;color:#64748b;letter-spacing:0.5px;
+  }
   /* SVG 요소 트랜지션 */
   .chrom{transition:transform .85s cubic-bezier(.5,.05,.3,1),opacity .45s;transform-origin:0 0;}
   .membrane,.nucleus{transition:all .7s cubic-bezier(.5,.05,.3,1),opacity .5s;}
   .celllabel{transition:opacity .5s;font-weight:800;}
 </style>
 </head>
-<body>
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 <div class="wrap">
   <h1>🔬 클릭으로 배우는 세포분열</h1>
   <p class="sub">그림을 클릭하거나 <b>다음 ▶</b> 버튼을 누를 때마다 한 단계씩 진행됩니다.</p>
@@ -117,15 +121,10 @@
   <div class="stage">
     <div class="canvas-box">
       <svg id="svg" viewBox="0 0 660 540" xmlns="http://www.w3.org/2000/svg">
-        <!-- 세포막 풀 -->
         <g id="membranes"></g>
-        <!-- 핵막 풀 -->
         <g id="nuclei"></g>
-        <!-- 방추사 -->
         <g id="spindle"></g>
-        <!-- 세포 라벨 -->
         <g id="labels"></g>
-        <!-- 염색체 풀 -->
         <g id="chroms"></g>
       </svg>
       <div class="clickhint">👆 클릭하면 다음 단계</div>
@@ -157,6 +156,10 @@
     <span>긴/짧은 막대 = 서로 다른 <b>상동염색체</b></span>
     <span>✕자 모양 = 복제된 염색체(<b>염색 분체</b> 2개)</span>
     <span>ㅣ막대 = 염색 분체 1개</span>
+  </div>
+
+  <div class="copyright">
+    All Rights Reserved (무단 전재 및 재배포 금지)
   </div>
 </div>
 
@@ -270,7 +273,7 @@ const meiosis=[
   { phase:"감수 2분열 — 중기", dna:"2", chr:"2 (n)", cell:"2",
     poles:[[210,168],[452,168],[210,352],[452,352]],
     cells:[[CX,168,175,92],[CX,352,175,92]],
-    chroms:{LP:P(CX,140,"X",90),SP:P(CX,196,"X",90),LP2:P(CX,140,"X",90,1),SP2:P(CX,196,"X",90,1),
+    chroms:{LP:P(CX,140("X",90),SP:P(CX,196,"X",90),LP2:P(CX,140,"X",90,1),SP2:P(CX,196,"X",90,1),
             LM:P(CX,324,"X",90),SM:P(CX,380,"X",90),LM2:P(CX,324,"X",90,1),SM2:P(CX,380,"X",90,1)},
     desc:`<b>감수 2분열</b>이 시작됩니다. ⚡ <b>DNA 복제 없이</b> 곧바로 진행돼요. 각 세포에서 ✕자 염색체가 <b>적도판에 배열</b>됩니다.` },
   { phase:"감수 2분열 — 후기", dna:"1", chr:"2 (n)", cell:"2",
